@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                var countries = JSON.parse(xhr.responseText);
+                for (var i = 0; i < countries.length; i++) {
+                    var country = countries[i];
+                    console.log('Name:', country.name.common);
+                    console.log('Region:', country.region);
+                    console.log('Sub-region:', country.subregion);
+                    console.log('Population:', country.population);
+                    console.log('-------------------------');
+                }
+            } else {
+                console.error('Failed to load data:');
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error('Network request failed');
+        };
+
+        xhr.send();
+    </script>
+</body>
+</html>
